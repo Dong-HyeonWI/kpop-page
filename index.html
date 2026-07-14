@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-POP: 세계를 사로잡은 한국의 대중음악</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #ff2a5f;
+            --secondary: #7e22ce;
+            --accent: #06b6d4;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Background Glows */
+        .glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-1 {
+            top: -10%;
+            left: -10%;
+            background: var(--primary);
+        }
+
+        .glow-2 {
+            bottom: -10%;
+            right: -10%;
+            background: var(--secondary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 6rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff, #a5b4fc, #ff2a5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 42, 95, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 42, 95, 0.5);
+        }
+
+        /* Features Section */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(to right, #ffffff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 8rem;
+        }
+
+        /* Glass Card */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 42, 95, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Highlight Section */
+        .highlight-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            padding: 4rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.03));
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            margin-bottom: 8rem;
+        }
+
+        .highlight-content {
+            flex: 1;
+        }
+
+        .highlight-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .highlight-content p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .highlight-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .highlight-container {
+                flex-direction: column;
+                padding: 2rem;
+                gap: 2rem;
+            }
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">K-POP PULSE</div>
+            <nav>
+                <a href="#features">특징</a>
+                <a href="#impact">글로벌 영향력</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>세계를 움직이는<br>K-POP의 에너지</h1>
+            <p>강렬한 퍼포먼스, 트렌디한 멜로디, 그리고 전 세계 팬덤이 하나 되는 거대한 문화 현상, K-pop의 매력 속으로 여러분을 초대합니다.</p>
+            <a href="#features" class="btn btn-primary">더 알아보기</a>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features">
+            <h2 class="section-title">K-POP의 핵심 매력</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-icon">⚡</span>
+                    <h3>칼군무와 퍼포먼스</h3>
+                    <p>눈을 뗄 수 없는 화려하고 정교한 군무와 한 편의 예술 작품 같은 무대 연출은 K-pop만의 독보적인 정체성입니다.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🎵</span>
+                    <h3>글로벌 트렌디 사운드</h3>
+                    <p>힙합, R&B, EDM, 팝 등 전 세계의 다양한 장르를 창의적으로 융합하여 중독성 넘치는 멜로디를 선사합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🤝</span>
+                    <h3>팬덤 문화와 소통</h3>
+                    <p>전 세계 팬들과 아티스트가 소셜 미디어와 커뮤니티 플랫폼을 통해 실시간으로 연결되며 강력한 유대감을 형성합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Highlight Section -->
+        <section id="impact" class="highlight-container">
+            <div class="highlight-content">
+                <h2>글로벌 음악 시장의 중심</h2>
+                <p>K-pop은 이제 아시아를 넘어 빌보드 차트 점령, 글로벌 스타디움 투어, 세계적인 시상식 수상 등 주류 음악 산업의 메인스트림으로 당당히 자리 잡았습니다.</p>
+                <div class="highlight-stats">
+                    <div class="stat-item">
+                        <h4>#1</h4>
+                        <p>빌보드 200 차트 다수 석권</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>100M+</h4>
+                        <p>전 세계 팬덤 규모</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 K-POP PULSE. Designed for K-pop Introduction.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
